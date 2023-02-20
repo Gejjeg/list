@@ -13,13 +13,26 @@ export class TodoList extends React.Component {
 
     addItem = () => {
         const list = document.createElement("li")
+        const itemList = document.getElementById("item-list")
+        const clear = document.getElementById("clear")
+        itemList.appendChild(list)
+        itemList.appendChild(clear)
+        // document.querySelector("clearList")
+        // itemList.parentNode.removeChild(clearList)
         list.innerHTML = this.state.item
-        document.getElementById("item-list").appendChild(list)
+        itemList.appendChild(list)
         document.getElementById("list").value = ""
     }
 
     reset = () => {
         document.querySelector("ul").innerHTML = ""
+    }
+
+    clearList = () => {
+        const clear = document.getElementById("clear")
+        clear.remove()
+        const list = document.querySelector("li")
+        list.remove()
     }
 
     render() {
@@ -32,6 +45,7 @@ export class TodoList extends React.Component {
                 <ul id="item-list"></ul>
                 <button onClick={this.addItem}>Add Item</button> 
                 <button onClick={this.reset}>Reset</button> 
+                <button id="clear" name="remove" onClick={this.clearList}>x</button>
             </div> 
         )
     }
